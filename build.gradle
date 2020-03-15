@@ -9,6 +9,12 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+
+    // Maven publish plugin
+    id 'maven-publish'
+
+    // Bintray plugin for publishing
+    id 'com.jfrog.bintray' version "${bintray_plugin_version}"
 }
 
 repositories {
@@ -30,3 +36,117 @@ test {
     // Use junit platform for unit tests
     useJUnitPlatform()
 }
+
+ext {
+    bintrayUserOrg = 'handspy'
+    bintrayRepo = 'maven'
+    bintrayName = rootProject.name
+
+    libraryName = rootProject.name
+
+    publishedGroupId = 'pt.up.hs'
+    artifact = rootProject.name
+    libraryVersion = version
+
+    libraryDescription = "A Java library to conduct the pause-burst analysis on handwriting captured data and build its result. "
+
+    siteUrl = 'https://github.com/handspy/pause-burst-builder'
+    gitUrl = 'https://github.com/handspy/pause-burst-builder.git'
+
+    developerId = 'jcpaiva'
+    developerName = 'José Carlos Paiva'
+    developerEmail = 'josepaiva94@gmail.com'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://opensource.org/licenses/MIT'
+    allLicenses = ['MIT']
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name licenseName
+            url licenseUrl
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id developerId
+            name developerName
+            email developerEmail
+        }
+    }
+
+    scm {
+        url gitUrl
+    }
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId publishedGroupId
+            artifactId artifactId
+            version libraryVersion
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', libraryDescription)
+                root.appendNode('name', libraryName)
+                root.appendNode('url', siteUrl)
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    publications = ['MyPublication']
+
+    // configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        userOrg = bintrayUserOrg
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publish = true
+        publicDownloadNumbers = true
+
+        version {
+            desc = libraryDescription
+            gpg {
+                sign = true
+                passphrase = properties.getProperty("bintray.gpg.password")
+            }
+        }
+    }
+}
+

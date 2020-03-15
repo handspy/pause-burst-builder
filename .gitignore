@@ -6,3 +6,7 @@ build
 
 # Ignore IDE files
 .idea
+
+# Ignore secret
+local.properties
+
