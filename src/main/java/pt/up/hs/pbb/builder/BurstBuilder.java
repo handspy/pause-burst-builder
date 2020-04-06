@@ -25,6 +25,8 @@ public class BurstBuilder {
     private double previousY;
     private long previousTimestamp;
 
+    private int count;
+
     private DoubleAverageReducer distanceReducer;
     private DoubleAverageReducer speedReducer;
 
@@ -43,6 +45,8 @@ public class BurstBuilder {
         this.previousX = startX;
         this.previousY = startY;
         this.previousTimestamp = startTimestamp;
+
+        this.count = 1;
 
         this.distanceReducer = new DoubleAverageReducer();
         this.speedReducer = new DoubleAverageReducer();
@@ -87,6 +91,8 @@ public class BurstBuilder {
 
         accumulateExtraFeatures(extra);
 
+        this.count++;
+
         this.previousX = x;
         this.previousY = y;
         this.previousTimestamp = timestamp;
@@ -108,6 +114,7 @@ public class BurstBuilder {
                 startTimestamp, previousTimestamp,
                 startX, startY,
                 previousX, previousY,
+                count,
                 distanceReducer.reduce(),
                 speedReducer.reduce(),
                 extraFeatures

@@ -21,6 +21,8 @@ public class Burst implements Serializable {
     private double endX;
     private double endY;
 
+    private int captureCount;
+
     private double distance;
     private double speed;
 
@@ -34,6 +36,7 @@ public class Burst implements Serializable {
             long startTime, long endTime,
             double startX, double startY,
             double endX, double endY,
+            int captureCount,
             double distance, double speed,
             Map<String, Object> extraFeatures
     ) {
@@ -44,6 +47,7 @@ public class Burst implements Serializable {
         this.startY = startY;
         this.endX = endX;
         this.endY = endY;
+        this.captureCount = captureCount;
         this.distance = distance;
         this.speed = speed;
         this.extraFeatures = extraFeatures;
@@ -53,80 +57,44 @@ public class Burst implements Serializable {
         return pauseDuration;
     }
 
-    public void setPauseDuration(long pauseDuration) {
-        this.pauseDuration = pauseDuration;
-    }
-
     public long getStartTime() {
         return startTime;
-    }
-
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
     }
 
     public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
-    }
-
     public double getStartX() {
         return startX;
-    }
-
-    public void setStartX(double startX) {
-        this.startX = startX;
     }
 
     public double getStartY() {
         return startY;
     }
 
-    public void setStartY(double startY) {
-        this.startY = startY;
-    }
-
     public double getEndX() {
         return endX;
-    }
-
-    public void setEndX(double endX) {
-        this.endX = endX;
     }
 
     public double getEndY() {
         return endY;
     }
 
-    public void setEndY(double endY) {
-        this.endY = endY;
+    public int getCaptureCount() {
+        return captureCount;
     }
 
     public double getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
     public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
     public Map<String, Object> getExtraFeatures() {
         return extraFeatures;
-    }
-
-    public void setExtraFeatures(Map<String, Object> extraFeatures) {
-        this.extraFeatures = extraFeatures;
     }
 
     @Override
@@ -139,6 +107,7 @@ public class Burst implements Serializable {
                 ", startY=" + startY +
                 ", endX=" + endX +
                 ", endY=" + endY +
+                ", captureCount=" + captureCount +
                 ", distance=" + distance +
                 ", speed=" + speed +
                 ", extraFeatures=" + extraFeatures +

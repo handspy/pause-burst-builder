@@ -45,6 +45,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(5, burst.getEndY());
         Assertions.assertEquals(0, burst.getStartTime());
         Assertions.assertEquals(2000, burst.getEndTime());
+        Assertions.assertEquals(6, burst.getCaptureCount());
         Assertions.assertEquals(1.131371, burst.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0.002546, burst.getSpeed(), TestUtils.EPSILON);
     }
@@ -71,6 +72,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(5, burst.getEndY());
         Assertions.assertEquals(0, burst.getStartTime());
         Assertions.assertEquals(2000, burst.getEndTime());
+        Assertions.assertEquals(6, burst.getCaptureCount());
         Assertions.assertEquals(1.131371, burst.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0.002546, burst.getSpeed(), TestUtils.EPSILON);
 
@@ -82,6 +84,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(10, outlier.getEndY());
         Assertions.assertEquals(5000, outlier.getStartTime());
         Assertions.assertEquals(5000, outlier.getEndTime());
+        Assertions.assertEquals(1, outlier.getCaptureCount());
         Assertions.assertEquals(0, outlier.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0, outlier.getSpeed(), TestUtils.EPSILON);
     }
@@ -107,6 +110,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(1, burst1.getEndY());
         Assertions.assertEquals(0, burst1.getStartTime());
         Assertions.assertEquals(0, burst1.getEndTime());
+        Assertions.assertEquals(1, burst1.getCaptureCount());
         Assertions.assertEquals(0, burst1.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0, burst1.getSpeed(), TestUtils.EPSILON);
 
@@ -118,6 +122,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(2, burst2.getEndY());
         Assertions.assertEquals(500, burst2.getStartTime());
         Assertions.assertEquals(500, burst2.getEndTime());
+        Assertions.assertEquals(1, burst2.getCaptureCount());
         Assertions.assertEquals(0, burst2.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0, burst2.getSpeed(), TestUtils.EPSILON);
 
@@ -129,6 +134,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(4, burst3.getEndY());
         Assertions.assertEquals(1000, burst3.getStartTime());
         Assertions.assertEquals(1300, burst3.getEndTime());
+        Assertions.assertEquals(2, burst3.getCaptureCount());
         Assertions.assertEquals(1.414214, burst3.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0.004714, burst3.getSpeed(), TestUtils.EPSILON);
 
@@ -140,6 +146,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(5, burst4.getEndY());
         Assertions.assertEquals(1900, burst4.getStartTime());
         Assertions.assertEquals(2000, burst4.getEndTime());
+        Assertions.assertEquals(2, burst4.getCaptureCount());
         Assertions.assertEquals(0, burst4.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0, burst4.getSpeed(), TestUtils.EPSILON);
     }
