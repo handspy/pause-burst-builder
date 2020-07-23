@@ -46,7 +46,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(0, burst.getStartTime());
         Assertions.assertEquals(2000, burst.getEndTime());
         Assertions.assertEquals(6, burst.getCaptureCount());
-        Assertions.assertEquals(1.131371, burst.getDistance(), TestUtils.EPSILON);
+        Assertions.assertEquals(5.656854, burst.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0.002546, burst.getSpeed(), TestUtils.EPSILON);
     }
 
@@ -73,7 +73,7 @@ public class TestPauseBurstBuilder {
         Assertions.assertEquals(0, burst.getStartTime());
         Assertions.assertEquals(2000, burst.getEndTime());
         Assertions.assertEquals(6, burst.getCaptureCount());
-        Assertions.assertEquals(1.131371, burst.getDistance(), TestUtils.EPSILON);
+        Assertions.assertEquals(5.656854, burst.getDistance(), TestUtils.EPSILON);
         Assertions.assertEquals(0.002546, burst.getSpeed(), TestUtils.EPSILON);
 
         Burst outlier = bursts.get(1);

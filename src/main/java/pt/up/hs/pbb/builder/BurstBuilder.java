@@ -2,6 +2,7 @@ package pt.up.hs.pbb.builder;
 
 import pt.up.hs.pbb.models.Burst;
 import pt.up.hs.pbb.reducer.DoubleAverageReducer;
+import pt.up.hs.pbb.reducer.DoubleSumReducer;
 import pt.up.hs.pbb.reducer.ValueReducer;
 import pt.up.hs.pbb.utils.MathUtils;
 
@@ -15,22 +16,22 @@ import java.util.stream.Collectors;
  */
 public class BurstBuilder {
 
-    private long pauseDuration;
+    private final long pauseDuration;
 
-    private double startX;
-    private double startY;
-    private long startTimestamp;
+    private final double startX;
+    private final double startY;
+    private final long startTimestamp;
+
+    private final DoubleSumReducer distanceReducer;
+    private final DoubleAverageReducer speedReducer;
+
+    private final Map<String, ValueReducer> extraReducers;
 
     private double previousX;
     private double previousY;
     private long previousTimestamp;
 
     private int count;
-
-    private DoubleAverageReducer distanceReducer;
-    private DoubleAverageReducer speedReducer;
-
-    private Map<String, ValueReducer> extraReducers;
 
     private BurstBuilder(
             Map<String, ValueReducer> extraReducers,
@@ -48,7 +49,7 @@ public class BurstBuilder {
 
         this.count = 1;
 
-        this.distanceReducer = new DoubleAverageReducer();
+        this.distanceReducer = new DoubleSumReducer();
         this.speedReducer = new DoubleAverageReducer();
 
         this.extraReducers = extraReducers;
